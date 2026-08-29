@@ -1,0 +1,27 @@
+{
+  "name": "edgesync-bench",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Banc de stress et d'attaque pour EdgeSync : nombreux pairs, scenarios adverses, mesures sur le fil.",
+  "license": "AGPL-3.0-or-later",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "bench": "tsx bench/run.ts",
+    "bench:scale": "tsx bench/scale.ts",
+    "bench:flood": "tsx bench/flood.ts"
+  },
+  "dependencies": {
+    "edgesync-protocol": "file:../EdgeSync",
+    "@noble/hashes": "^1.7.0",
+    "yjs": "^13.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}
