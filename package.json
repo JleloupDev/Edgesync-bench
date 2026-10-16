@@ -11,7 +11,10 @@
     "typecheck": "tsc --noEmit",
     "bench": "tsx bench/run.ts",
     "bench:scale": "tsx bench/scale.ts",
-    "bench:flood": "tsx bench/flood.ts"
+    "bench:flood": "tsx bench/flood.ts",
+    "demo": "tsx apps/server.ts",
+    "demo:watch": "tsx apps/server.ts --watch",
+    "lab": "tsx lab/run.ts"
   },
   "dependencies": {
     "edgesync-protocol": "file:../EdgeSync",
@@ -22,6 +25,9 @@
     "@types/node": "^22.0.0",
     "tsx": "^4.19.0",
     "typescript": "^5.6.0",
-    "vitest": "^2.1.0"
+    "vitest": "^2.1.0",
+    "esbuild": "^0.24.0",
+    "ws": "^8.18.0",
+    "@types/ws": "^8.5.0"
   }
 }

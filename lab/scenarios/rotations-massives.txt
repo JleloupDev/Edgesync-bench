@@ -1,0 +1,22 @@
+# DES RETRAITS DE DROITS REGULIERS : VINGT ROTATIONS DE CLE A LA SUITE.
+#
+# Huit pairs, qui ecrivent tout du long. Vingt fois, un membre tire au hasard
+# passe sous `read` (la cle tourne) puis revient en `write`, avec quelques ticks
+# de vie normale entre les deux. Une organisation reelle n'en fait pas autant en
+# une heure, mais c'est ce que coute un vault tres administre.
+#
+# Ce que ce scenario etablit : la chaine reste unique, tout le monde finit sur la
+# meme cle, et le contenu converge malgre des rotations en rafale. Le cout
+# (taille de la chaine, nombre de cles gardees par chaque keyring) est mesure
+# par `npm run bench`.
+pairs 8
+latence 1 3
+admettre *
+tourne 20
+rotations 20 4
+tourne 20
+apaiser 250
+attendre chaine-unique
+attendre rotations-min 20
+attendre cle-commune
+attendre converge

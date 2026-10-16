@@ -1,0 +1,29 @@
+# Cinq pairs honnetes, aucun byzantin, aucune coupure : seulement 3 % de trames
+# perdues — un lien qui perd sans se rompre.
+#
+# CE QUE CE SCENARIO ETABLIT :
+#   · le plan d'AUTORITE se repare tout seul. Une epoque manquante declenche un
+#     ChainReq, et la chaine se recolle : `chaine-unique` tient.
+#   · le plan du CONTENU, non. Un frame OP perdu n'est jamais redemande : la
+#     synchronisation par vecteur d'etat n'a lieu qu'au HELLO et apres une cle.
+#     Sans reconnexion, rien ne la redeclenche, et les replicas restent
+#     differents — silencieusement, definitivement.
+#
+# Sur TCP/WebSocket la perte se manifeste par une rupture, donc un HELLO, donc un
+# rattrapage : le protocole est correct SOUS SON HYPOTHESE de lien fiable. Cette
+# hypothese n'est ecrite nulle part, et elle tombe des qu'un relais laisse tomber
+# une trame sous charge sans fermer la connexion.
+#
+# DEPUIS LE GOSSIP (ADR-0018), le contenu converge ici aussi : dans un maillage
+# de cinq pairs, chaque OP arrive par plusieurs chemins, et une trame perdue est
+# rattrapee par une autre copie. C'est de la redondance, pas une reparation : si
+# toutes les copies d'un OP se perdent, ou sur une ligne ou il n'y a qu'un
+# chemin, rien ne le redemande. L'anti-entropie periodique reste a faire.
+pairs 5
+latence 1 4
+perte 0.03
+admettre *
+tourne 60
+apaiser 200
+attendre chaine-unique
+attendre converge

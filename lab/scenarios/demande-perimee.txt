@@ -1,0 +1,24 @@
+# UNE DEMANDE SIGNEE AVANT UNE ROTATION, LIVREE APRES.
+#
+# p1 (admin) signe « p3 admin » et la garde — hors ligne, en file, peu importe.
+# Pendant ce temps, p0 retire p4 : la cle tourne. Puis la demande de p1 arrive.
+#
+# Ce que ce scenario etablit (ADR-0019) : une rotation veut dire que quelqu'un a
+# perdu la lecture ; toute decision prise avant doit etre reprise en
+# connaissance de cause. La demande est perimee, elle ne s'applique pas, et p3
+# garde son niveau.
+pairs 5
+latence 1 2
+admettre *
+tourne 15
+admettre p1 manage
+tourne 15
+preparer p1 p3 manage
+revoquer p4
+tourne 20
+livrer p1
+tourne 20
+apaiser 100
+attendre niveau p3 write
+attendre hors-du-vault p4
+attendre chaine-unique

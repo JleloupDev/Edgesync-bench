@@ -1,0 +1,23 @@
+# DEUX ADMINS DECIDENT SUR LE MEME MEMBRE, SANS S'ETRE VUS.
+#
+# p1 veut p4 lecteur, p2 le confirme ecrivain. Chacun signe sur la tete qu'il voit ;
+# aucun n'a vu la decision de l'autre. Ce n'est pas une attaque, c'est la
+# concurrence legitime d'une organisation.
+#
+# Ce que ce scenario etablit : la chaine reste unique et la cle commune —
+# l'arbitre tranche par son ordre (D21, D34 en attendant le gel). Mais il le
+# SIGNALE (ADR-0019) : la seconde decision a ete prise sans connaitre la
+# premiere. Aujourd'hui personne d'autre que l'arbitre ne le voit, et rien n'est
+# gele : c'est la limite suivante, notee ici.
+pairs 5
+latence 1 3
+admettre *
+tourne 15
+admettre p1 p2 manage
+tourne 15
+concurrence p1 p2 p4 read write
+tourne 20
+apaiser 120
+attendre conflit-signale
+attendre chaine-unique
+attendre cle-commune

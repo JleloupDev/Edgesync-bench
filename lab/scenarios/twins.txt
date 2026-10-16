@@ -1,0 +1,20 @@
+# Twins (Bano et al., arXiv:2004.10617) applique a l'arbitre.
+#
+# On n'ecrit aucune malveillance : on DEDOUBLE le fondateur. Deux Sessions qui se
+# croient uniques, memes cles, vues separees. Le jumeau admet p4 en lecture au
+# moment meme ou l'original l'admet en ecriture : deux epoques differentes a la
+# meme hauteur, signees par la meme main, avant que l'une ait pu entendre l'autre.
+#
+# Le resultat attendu n'est PAS la convergence. A k=1, la these du protocole est
+# explicite : « byzantins detectables et attribuables, pas empeches ». Ce scenario
+# verifie que la preuve existe, et qu'aucune des deux branches n'efface l'autre.
+pairs 5
+latence 1 3
+admettre p1 p2 p3
+tourne 30
+jumeau p0
+admettre p4 write
+tourne 40
+apaiser 150
+attendre equivocation
+attendre divergence

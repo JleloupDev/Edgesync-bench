@@ -1,0 +1,21 @@
+# PASSER UN MEMBRE DE ECRITURE A PULL : IL PERD LA LECTURE, LA CLE DOIT TOURNER.
+#
+# Avant le correctif, seul un retrait (`remove`) faisait tourner la cle : un
+# membre retrograde en `pull` gardait la cle et continuait de lire tout le futur.
+#
+# Ce que ce scenario etablit (D11) : la rotation suit la perte effective du droit
+# de lire, quel que soit le verbe. p2 reste dans le vault pour repliquer du
+# chiffre, mais il n'a plus la cle courante.
+pairs 5
+latence 1 3
+admettre *
+tourne 20
+decider p0 p2 pull
+tourne 30
+apaiser 150
+attendre niveau p2 pull
+attendre rotations-min 1
+attendre sans-cle p2
+attendre aucun-ecrit-de p2
+attendre converge
+attendre cle-commune

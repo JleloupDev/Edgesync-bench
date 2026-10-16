@@ -1,0 +1,13 @@
+# Le revoque tetu : il ne sait pas encore qu'il est dehors, il continue d'ecrire.
+# Ses ecritures d'apres revocation portent un `!` — aucune ne doit apparaitre chez
+# les autres. Ce qu'il a lu AVANT, il le garde : c'est irreductible, et assume.
+pairs 5
+latence 1 3
+admettre *
+tourne 30
+revoquer p2
+tourne 50
+apaiser 150
+attendre aucun-ecrit-de p2
+attendre converge
+attendre chaine-unique

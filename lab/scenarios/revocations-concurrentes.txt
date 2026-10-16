@@ -1,0 +1,19 @@
+# Deux revocations lancees dans le meme tick, par deux administrateurs.
+#
+# C'est LE probleme fondateur du protocole : deux cles ne fusionnent jamais. La
+# reponse d'EdgeSync n'est pas de les fusionner, c'est de ne jamais les produire —
+# un seul arbitre ordonne, donc les deux demandes se SERIALISENT en deux epoques
+# successives, chacune avec sa rotation. Aucun vault scinde en deux moities
+# sourdes, meme quand les deux admins cliquent en meme temps.
+pairs 6
+latence 1 3
+admettre * manage
+tourne 30
+revoquer p4
+revoquer p5
+tourne 40
+apaiser 150
+attendre chaine-unique
+attendre converge
+attendre aucun-ecrit-de p4
+attendre aucun-ecrit-de p5

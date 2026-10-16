@@ -1,0 +1,11 @@
+# Six pairs, une admission en un lot, du trafic, un verdict.
+# Le scenario le plus ennuyeux du banc : c'est celui qui doit TOUJOURS tenir.
+pairs 6
+latence 1 3
+admettre *
+tourne 40
+apaiser 120
+attendre converge
+attendre chaine-unique
+attendre cle-commune
+attendre tous-membres

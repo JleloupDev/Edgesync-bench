@@ -1,0 +1,18 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<!doctype html>
+<meta charset="utf-8">
+<title>EdgeSync · base CRUD</title>
+<link rel="stylesheet" href="/styles.css">
+<div id="bar"></div>
+<div id="panel"></div>
+<div class="note">
+  Deuxieme canal du meme vault : meme chaine, meme keyring, aucune cle echangee
+  pour lui (K_doc se derive de K_vault).
+</div>
+<div style="padding:6px 8px; display:flex; gap:6px">
+  <input type="text" id="nom" placeholder="nom de l'article">
+  <button id="add">ajouter</button>
+</div>
+<table id="items"><thead><tr><th></th><th>nom</th><th>quantite</th><th>par</th><th></th></tr></thead><tbody></tbody></table>
+<div id="foot"><span id="count"></span></div>
+<script type="module" src="/dist/crud.js"></script>

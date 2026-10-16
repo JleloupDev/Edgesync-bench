@@ -19,8 +19,14 @@ export const OWNERS = sha256(new TextEncoder().encode('owners-group'))
 
 export const settle = (ms = 60) => new Promise((r) => setTimeout(r, ms))
 
-export function aclOp(issuer: OwnIdentity, group: Uint8Array, changes: AclChange[]): AclOp {
-  return signAclOp(VAULT_ID, { group, changes, issuer: issuer.signPub }, (m) => issuer.sign(m))
+/**
+ * An op signed by hand. With a `chain`, it is anchored the way a Session would
+ * anchor it (ADR-0019): base = the head, prev = the issuer's latest applied op.
+ * Without, it has no base — only the genesis may do that.
+ */
+export function aclOp(issuer: OwnIdentity, group: Uint8Array, changes: AclChange[], chain?: AclChain): AclOp {
+  const anchor = chain ? { base: chain.head(), prev: chain.latestOf(issuer.signPub) } : {}
+  return signAclOp(VAULT_ID, { group, changes, issuer: issuer.signPub, ...anchor }, (m) => issuer.sign(m))
 }
 
 export interface Peer {

@@ -1,0 +1,14 @@
+# Une coupure au milieu du trafic. Le pair coupe continue d'ecrire dans le vide,
+# les autres continuent sans lui, et au retour tout se recolle par vecteur d'etat
+# (ADR-0008) — sans que personne ait rien redemande explicitement.
+pairs 5
+latence 1 4
+admettre *
+tourne 30
+couper p3
+tourne 40
+retablir p3
+tourne 30
+apaiser 150
+attendre converge
+attendre chaine-unique

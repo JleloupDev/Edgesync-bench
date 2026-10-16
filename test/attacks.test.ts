@@ -186,7 +186,7 @@ describe('attaques — format et rejeu', () => {
     // séparation de domaine qui a bloqué, et pas autre chose.
     const legitime = aclOp(founder.identity, ROOT_GROUP, [
       { t: 'set', principal: keyPrincipal(cible.signPub), access: Access.Write },
-    ])
+    ], founder.chain)
     evil.send('founder', evil.request(legitime))
     await settle(200)
     expect(resolveAccess(founder.chain.state(), cible.signPub)).toBe(Access.Write)

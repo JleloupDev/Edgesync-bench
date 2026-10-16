@@ -1,0 +1,27 @@
+# Quatre facons d'etre de mauvaise foi, en meme temps, pendant que le reseau perd
+# des trames :
+#   p1 ment      — epoques qu'il n'a pas le droit de miner, ops d'un autre vault,
+#                  contenu scelle sous une cle inventee
+#   p2 inonde    — demande sans cesse le droit `manage` (A9)
+#   p3 rejoue    — renvoie ce qu'il a capte sur le fil
+#   p4 est sourd — panne grise : il parle, il n'ecoute plus
+# Les honnetes doivent converger quand meme, et aucune epoque des byzantins ne
+# doit entrer dans la chaine.
+#
+# Le lien est FIABLE ici, volontairement : la perte est une borne a part
+# (perte.txt), et la melanger aux byzantins ferait echouer ce scenario pour une
+# raison qui n'a rien a voir avec eux.
+pairs 7
+profil p1 menteur
+profil p2 inondeur
+profil p3 rejoueur
+profil p4 sourd
+latence 1 4
+admettre *
+tourne 80
+apaiser 200
+attendre converge
+attendre chaine-unique
+attendre aucune-epoque-de p1
+attendre aucune-epoque-de p2
+attendre aucune-epoque-de p3

@@ -1,0 +1,21 @@
+# Trois arbitres declares, aujourd'hui.
+#
+# `arbiterSet` impose un ensemble IMPAIR et `quorumSize(3) = 2` : il faut deux
+# signatures. Mais `Session.mint` signe seule (D42, k=1) et `appendLocal` n'a pas
+# de certificat a verifier — donc l'arbitre qui mine avance TOUT SEUL pendant que
+# le reseau, lui, refuse ses epoques pour « quorum not met ».
+#
+# Ce scenario n'est pas un test de non-regression : c'est la borne C7, ecrite en
+# executable. Le jour ou l'accord entre arbitres existera, `divergence` devra
+# devenir `chaine-unique` — et ce fichier sera la preuve que le travail est fait.
+pairs 6
+latence 1 3
+admettre * manage
+tourne 30
+arbitre p1 on
+arbitre p2 on
+tourne 20
+admettre p3 manage
+tourne 40
+apaiser 150
+attendre divergence

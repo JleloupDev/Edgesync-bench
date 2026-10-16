@@ -1,0 +1,20 @@
+# UN EMETTEUR SIGNE DEUX DECISIONS DIFFERENTES DERRIERE LA MEME PRECEDENTE.
+#
+# p1 (admin) envoie « p3 read » et « p3 manage », chacune pointant vers la meme
+# demande precedente. Un honnete ne le fait jamais : c'est un appareil compromis,
+# ou deux appareils qui partagent une cle — ce que D18 interdit.
+#
+# Ce que ce scenario etablit (ADR-0019) : la premiere arrivee s'applique, la
+# seconde ne s'applique jamais (fork), et les deux signatures restent la preuve
+# de l'equivocation.
+pairs 4
+latence 1 2
+admettre *
+tourne 15
+admettre p1 manage
+tourne 15
+fourche p1 p3 read manage
+tourne 20
+apaiser 100
+attendre niveau p3 read
+attendre chaine-unique

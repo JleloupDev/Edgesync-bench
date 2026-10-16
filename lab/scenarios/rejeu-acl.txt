@@ -1,0 +1,35 @@
+# LE REJEU D'UNE DEMANDE ACL ANNULE UNE REVOCATION.
+#
+# Trouve par tirage (graine 115108), reduit ici au cas minimal.
+#
+# Une AclOp porte {group, changes, issuer, sig} — et rien d'autre. Ni date, ni
+# position dans la chaine, ni compteur. Elle est donc valable POUR TOUJOURS : la
+# demande « admets p2 en ecriture », signee par l'administrateur au moment ou il
+# la voulait, reste une demande valide le lendemain, apres que ce meme
+# administrateur a revoque p2.
+#
+# N'importe qui peut la rejouer. Pas besoin de cle : les ops voyagent en clair
+# dans les epoques, et la chaine est servie a qui la demande (D8). Il suffit de
+# la relire et de la renvoyer a l'arbitre, qui la verifie — signature bonne,
+# emetteur autorise — et la remet dans une epoque.
+#
+# Ce que ce scenario etablit : `revoquer` n'est pas un etat, c'est un evenement
+# que le rejeu peut ecraser.
+#
+# CORRIGE (ADR-0019). Une demande porte desormais sa base, la tete que voyait
+# son emetteur, dans la partie signee. La revocation de p2 a fait tourner la cle
+# apres cette base : la demande est perimee, l'arbitre ne la remet pas en jeu.
+# Ce n'est plus la memoire du gossip qui la bloque — `oublier p0` simule un
+# redemarrage de l'arbitre, et la demande reste inerte.
+pairs 4
+latence 1 2
+admettre *
+tourne 20
+revoquer p2
+tourne 30
+attendre hors-du-vault p2
+oublier p0
+rejouer-acl p3 p0
+tourne 30
+apaiser 100
+attendre hors-du-vault p2

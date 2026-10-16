@@ -1,0 +1,24 @@
+# UN ADMIN DECIDE TROIS FOIS DE SUITE, LE RESEAU LIVRE A L'ENVERS.
+#
+# p1 est admin (pas owner : il ne peut pas nommer d'admin, D20). p3 ecrit deja.
+# p1 le confirme en ecriture, puis le passe en lecture : deux decisions signees
+# dans cet ordre. L'arbitre les recoit dans l'ordre inverse. Sans backlink, la
+# derniere arrivee (« write ») s'appliquerait en dernier et p3 resterait
+# ecrivain : le contraire de ce que p1 voulait, sans que personne le voie.
+#
+# Ce que ce scenario etablit (ADR-0019) : chaque demande cite la precedente du
+# meme emetteur ; l'arbitre retient celles dont la precedente n'est pas encore
+# appliquee, et le resultat suit l'ordre de SIGNATURE, pas celui d'ARRIVEE.
+pairs 5
+latence 1 3
+admettre *
+tourne 15
+admettre p1 manage
+tourne 15
+rafale p1 p3 write read
+tourne 20
+apaiser 120
+attendre niveau p3 read
+attendre chaine-unique
+attendre aucun-conflit
+attendre cle-commune

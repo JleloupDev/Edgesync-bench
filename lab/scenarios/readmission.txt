@@ -1,0 +1,23 @@
+# Reprendre quelqu'un apres l'avoir mis dehors.
+#
+# CE QUE CE SCENARIO ETABLIT : la readmission republie TOUT ce que le revoque a
+# ecrit pendant son exclusion. A la readmission, il recoit la cle courante et
+# pousse son instantane complet — ses ecritures « d'exil » entrent alors dans le
+# vault, scellees a la position d'aujourd'hui, ou il est de nouveau membre.
+#
+# Ce n'est pas une faille : c'est D40 applique jusqu'au bout — l'autorisation se
+# juge a la position causale de l'op, et ces ops sont emises maintenant. Mais
+# c'est une SEMANTIQUE, et personne ne l'avait ecrite : readmettre quelqu'un,
+# c'est accepter d'un coup tout ce qu'il a redige dehors.
+pairs 5
+latence 1 3
+admettre *
+tourne 30
+revoquer p2
+tourne 40
+admettre p2
+tourne 40
+apaiser 150
+attendre converge
+attendre chaine-unique
+attendre-pas aucun-ecrit-de p2
